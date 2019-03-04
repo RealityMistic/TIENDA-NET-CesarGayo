@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TiendaNETDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TiendaNETDBModelStoreContainer">
+    <EntitySet Name="PedidoSet" EntityType="TiendaNETDBModel.Store.PedidoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProductoSet" EntityType="TiendaNETDBModel.Store.ProductoSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UsuarioSet" EntityType="TiendaNETDBModel.Store.UsuarioSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PedidoSetProductoSet" EntityType="TiendaNETDBModel.Store.PedidoSetProductoSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_UsuarioPedido" Association="TiendaNETDBModel.Store.FK_UsuarioPedido">
+      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+      <End Role="PedidoSet" EntitySet="PedidoSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PedidoSetProductoSet_PedidoSet" Association="TiendaNETDBModel.Store.FK_PedidoSetProductoSet_PedidoSet">
+      <End Role="PedidoSet" EntitySet="PedidoSet" />
+      <End Role="PedidoSetProductoSet" EntitySet="PedidoSetProductoSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PedidoSetProductoSet_ProductoSet" Association="TiendaNETDBModel.Store.FK_PedidoSetProductoSet_ProductoSet">
+      <End Role="ProductoSet" EntitySet="ProductoSet" />
+      <End Role="PedidoSetProductoSet" EntitySet="PedidoSetProductoSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="PedidoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Fecha" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Completado" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Usuario_Id" Type="int" Nullable="false" />
+    <Property Name="Property1" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ProductoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Stock" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UsuarioSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PedidoSetProductoSet">
+    <Key>
+      <PropertyRef Name="PedidoSet_Id" />
+      <PropertyRef Name="ProductoSet_Id" />
+    </Key>
+    <Property Name="PedidoSet_Id" Type="int" Nullable="false" />
+    <Property Name="ProductoSet_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_UsuarioPedido">
+    <End Role="UsuarioSet" Type="TiendaNETDBModel.Store.UsuarioSet" Multiplicity="1" />
+    <End Role="PedidoSet" Type="TiendaNETDBModel.Store.PedidoSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsuarioSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PedidoSet">
+        <PropertyRef Name="Usuario_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PedidoSetProductoSet_PedidoSet">
+    <End Role="PedidoSet" Type="TiendaNETDBModel.Store.PedidoSet" Multiplicity="1" />
+    <End Role="PedidoSetProductoSet" Type="TiendaNETDBModel.Store.PedidoSetProductoSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PedidoSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PedidoSetProductoSet">
+        <PropertyRef Name="PedidoSet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PedidoSetProductoSet_ProductoSet">
+    <End Role="PedidoSetProductoSet" Type="TiendaNETDBModel.Store.PedidoSetProductoSet" Multiplicity="*" />
+    <End Role="ProductoSet" Type="TiendaNETDBModel.Store.ProductoSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="ProductoSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PedidoSetProductoSet">
+        <PropertyRef Name="ProductoSet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TiendaNETDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PedidoSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fecha" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="Completado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Usuario_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UsuarioSet" Relationship="Self.FK_UsuarioPedido" FromRole="PedidoSet" ToRole="UsuarioSet" />
+          <Property Name="Property1" Type="String" Nullable="false" />
+          <NavigationProperty Name="ProductoSet" Relationship="TiendaNETDBModel.PedidoSetProductoSet" FromRole="PedidoSet" ToRole="ProductoSet" />
+        </EntityType>
+        <EntityType Name="ProductoSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Stock" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PedidoSet" Relationship="TiendaNETDBModel.PedidoSetProductoSet" FromRole="ProductoSet" ToRole="PedidoSet" />
+        </EntityType>
+        <EntityType Name="UsuarioSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PedidoSet" Relationship="Self.FK_UsuarioPedido" FromRole="UsuarioSet" ToRole="PedidoSet" />
+        </EntityType>
+        <Association Name="FK_UsuarioPedido">
+          <End Role="UsuarioSet" Type="Self.UsuarioSet" Multiplicity="1" />
+          <End Role="PedidoSet" Type="Self.PedidoSet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsuarioSet">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PedidoSet">
+              <PropertyRef Name="Usuario_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TiendaNETDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PedidoSet" EntityType="Self.PedidoSet" />
+          <EntitySet Name="ProductoSet" EntityType="Self.ProductoSet" />
+          <EntitySet Name="UsuarioSet" EntityType="Self.UsuarioSet" />
+          <AssociationSet Name="FK_UsuarioPedido" Association="Self.FK_UsuarioPedido">
+            <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+            <End Role="PedidoSet" EntitySet="PedidoSet" />
+          </AssociationSet>
+          <AssociationSet Name="PedidoSetProductoSet" Association="TiendaNETDBModel.PedidoSetProductoSet">
+            <End Role="PedidoSet" EntitySet="PedidoSet" />
+            <End Role="ProductoSet" EntitySet="ProductoSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="PedidoSetProductoSet">
+          <End Type="TiendaNETDBModel.PedidoSet" Role="PedidoSet" Multiplicity="*" />
+          <End Type="TiendaNETDBModel.ProductoSet" Role="ProductoSet" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TiendaNETDBModelStoreContainer" CdmEntityContainer="TiendaNETDBEntities">
+    <EntitySetMapping Name="PedidoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TiendaNETDBModel.PedidoSet)">
+        <MappingFragment StoreEntitySet="PedidoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Completado" ColumnName="Completado" />
+          <ScalarProperty Name="Usuario_Id" ColumnName="Usuario_Id" />
+          <ScalarProperty Name="Property1" ColumnName="Property1" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductoSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TiendaNETDBModel.ProductoSet)">
+        <MappingFragment StoreEntitySet="ProductoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsuarioSet">
+      <EntityTypeMapping TypeName="IsTypeOf(TiendaNETDBModel.UsuarioSet)">
+        <MappingFragment StoreEntitySet="UsuarioSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PedidoSetProductoSet" TypeName="TiendaNETDBModel.PedidoSetProductoSet" StoreEntitySet="PedidoSetProductoSet">
+      <EndProperty Name="PedidoSet">
+        <ScalarProperty Name="Id" ColumnName="PedidoSet_Id" />
+      </EndProperty>
+      <EndProperty Name="ProductoSet">
+        <ScalarProperty Name="Id" ColumnName="ProductoSet_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

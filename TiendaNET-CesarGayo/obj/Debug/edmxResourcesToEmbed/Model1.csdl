@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TiendaNETDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="PedidoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Fecha" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Completado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Usuario_Id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UsuarioSet" Relationship="Self.FK_UsuarioPedido" FromRole="PedidoSet" ToRole="UsuarioSet" />
+    <NavigationProperty Name="ProductoSet" Relationship="Self.PedidoProducto" FromRole="PedidoSet" ToRole="ProductoSet" />
+  </EntityType>
+  <EntityType Name="ProductoSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Stock" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="PedidoSet" Relationship="Self.PedidoProducto" FromRole="ProductoSet" ToRole="PedidoSet" />
+  </EntityType>
+  <EntityType Name="UsuarioSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="PedidoSet" Relationship="Self.FK_UsuarioPedido" FromRole="UsuarioSet" ToRole="PedidoSet" />
+  </EntityType>
+  <Association Name="FK_UsuarioPedido">
+    <End Role="UsuarioSet" Type="Self.UsuarioSet" Multiplicity="1" />
+    <End Role="PedidoSet" Type="Self.PedidoSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsuarioSet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PedidoSet">
+        <PropertyRef Name="Usuario_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PedidoProducto">
+    <End Role="PedidoSet" Type="Self.PedidoSet" Multiplicity="*" />
+    <End Role="ProductoSet" Type="Self.ProductoSet" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="TiendaNETDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="PedidoSet" EntityType="Self.PedidoSet" />
+    <EntitySet Name="ProductoSet" EntityType="Self.ProductoSet" />
+    <EntitySet Name="UsuarioSet" EntityType="Self.UsuarioSet" />
+    <AssociationSet Name="FK_UsuarioPedido" Association="Self.FK_UsuarioPedido">
+      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
+      <End Role="PedidoSet" EntitySet="PedidoSet" />
+    </AssociationSet>
+    <AssociationSet Name="PedidoProducto" Association="Self.PedidoProducto">
+      <End Role="PedidoSet" EntitySet="PedidoSet" />
+      <End Role="ProductoSet" EntitySet="ProductoSet" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

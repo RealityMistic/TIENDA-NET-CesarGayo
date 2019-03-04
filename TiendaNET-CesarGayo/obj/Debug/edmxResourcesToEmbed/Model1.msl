@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TiendaNETDBModelStoreContainer" CdmEntityContainer="TiendaNETDBEntities">
+    <EntitySetMapping Name="PedidoSet">
+      <EntityTypeMapping TypeName="TiendaNETDBModel.PedidoSet">
+        <MappingFragment StoreEntitySet="PedidoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Completado" ColumnName="Completado" />
+          <ScalarProperty Name="Usuario_Id" ColumnName="Usuario_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductoSet">
+      <EntityTypeMapping TypeName="TiendaNETDBModel.ProductoSet">
+        <MappingFragment StoreEntitySet="ProductoSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsuarioSet">
+      <EntityTypeMapping TypeName="TiendaNETDBModel.UsuarioSet">
+        <MappingFragment StoreEntitySet="UsuarioSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PedidoProducto" TypeName="TiendaNETDBModel.PedidoProducto" StoreEntitySet="PedidoProducto">
+      <EndProperty Name="PedidoSet">
+        <ScalarProperty Name="Id" ColumnName="Pedido_Id" />
+      </EndProperty>
+      <EndProperty Name="ProductoSet">
+        <ScalarProperty Name="Id" ColumnName="Producto_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
