@@ -80,22 +80,24 @@ namespace TiendaNET_CesarGayo.Controllers
             PedidoSet nuevopedido = new PedidoSet();
             foreach (ProductoSet p in cc)
             {
-                
+                nuevopedido.Precio = p.Precio;
                 PrecioTotal += p.Precio;
                 nuevopedido.Producto_Id = p.Id;
                 nuevopedido.Cantidad = p.Cantidad;
-
+                db.PedidoSet.Add(nuevopedido);
+                db.SaveChanges();
                 ProductoSet temp = db.ProductoSet.Find(p.Id);
-                temp.Cantidad = temp.Cantidad - nuevopedido.Cantidad;
+                temp.Stock = temp.Stock - nuevopedido.Cantidad;
                 comprobarStock(p.Id);
+                temp.Cantidad = 0;
                 db.Entry(temp).State = EntityState.Modified;
                 db.SaveChanges();
 
                 
             }
-            nuevopedido.Precio = PrecioTotal;
-            db.PedidoSet.Add(nuevopedido);
-            db.SaveChanges();
+           // nuevopedido.Precio = PrecioTotal;
+            
+           // 
             
             cc.NuevoCarrito(ControllerContext);
 
@@ -108,9 +110,10 @@ namespace TiendaNET_CesarGayo.Controllers
             int stock = db.ProductoSet.Find(id).Stock;
             if (stock <= 2)
             {
-                StockSet stockset = new StockSet();
-                stockset.Producto_Id = db.ProductoSet.Find(id).Id;
-                stockset.Cantidad = 100;
+                StockSet nuevostockset = new StockSet();
+                nuevostockset.Producto_Id = db.ProductoSet.Find(id).Id;
+                nuevostockset.Cantidad = 100;
+                db.StockSet.Add(nuevostockset);
                 db.SaveChanges();
             }
         }

@@ -28,6 +28,5 @@ namespace TiendaNET_CesarGayo
         public virtual DbSet<PedidoSet> PedidoSet { get; set; }
         public virtual DbSet<ProductoSet> ProductoSet { get; set; }
         public virtual DbSet<StockSet> StockSet { get; set; }
-        public virtual DbSet<UsuarioSet> UsuarioSet { get; set; }
     }
 }

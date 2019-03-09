@@ -127,3 +127,4 @@ C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\obj\Debug\Ti
 C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\obj\Debug\TiendaNET-CesarGayo.csproj.CopyComplete
 C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\obj\Debug\TiendaNET-CesarGayo.dll
 C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\obj\Debug\TiendaNET-CesarGayo.pdb
+C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\obj\Debug\TiendaNET-CesarGayo.csprojAssemblyReference.cache

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TiendaNETDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TiendaNETDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="PedidoSet">
           <Key>
             <PropertyRef Name="Id" />
@@ -33,25 +33,12 @@
           <Property Name="Producto_Id" Type="int" Nullable="false" />
           <Property Name="Cantidad" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="UsuarioSet">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Telefono" Type="nvarchar(max)" Nullable="false" />
-          <Property Name="Direccion" Type="nvarchar(max)" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="TiendaNETDBModelStoreContainer">
           <EntitySet Name="PedidoSet" EntityType="Self.PedidoSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductoSet" EntityType="Self.ProductoSet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="StockSet" EntityType="Self.StockSet" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UsuarioSet" EntityType="Self.UsuarioSet" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TiendaNETDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -83,22 +70,10 @@
           <Property Name="Producto_Id" Type="Int32" Nullable="false" />
           <Property Name="Cantidad" Type="Int32" Nullable="false" />
         </EntityType>
-        <EntityType Name="UsuarioSet">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="TiendaNETDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="PedidoSet" EntityType="Self.PedidoSet" />
           <EntitySet Name="ProductoSet" EntityType="Self.ProductoSet" />
           <EntitySet Name="StockSet" EntityType="Self.StockSet" />
-          <EntitySet Name="UsuarioSet" EntityType="Self.UsuarioSet" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -134,18 +109,6 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Producto_Id" ColumnName="Producto_Id" />
                 <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UsuarioSet">
-            <EntityTypeMapping TypeName="TiendaNETDBModel.UsuarioSet">
-              <MappingFragment StoreEntitySet="UsuarioSet">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
