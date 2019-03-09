@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TiendaNET_CesarGayo.Models;
 
 namespace TiendaNET_CesarGayo.Controllers
 {
@@ -22,10 +23,40 @@ namespace TiendaNET_CesarGayo.Controllers
         }
         public ActionResult Productos()
         {
+
             ViewBag.Message = "Productos de la Tienda";
             
+            var lista = db.ProductoSet.Select(x=> new ProductoViewModel
+            {
+                CantidadAPedir = 0,
+                Descripcion = x.Descripcion,
+                Nombre = x.Nombre,
+                Stock = x.Stock,
+                Id = x.Id
+                
+            });
+          
+            return View(lista);
+        
+            // return View(db.ProductoSet);
+        }
+        public ActionResult AgregarACarrito(int id, int cantidadAPedir)
+        {
+            CarritoCompra productoCantidad = new CarritoCompra();
+           // productoCantidad.AddCarrito(id, cantidadAPedir);
+           // Session["Carrito"] = productoCantidad;
 
-            return View(db.ProductoSet.ToList());
+            return RedirectToAction("Index", "Carrito");
+           // return View("Index");
+        }
+        public ActionResult Mas()
+        {
+            return RedirectToAction("Productos");
+        }
+
+        public ActionResult Menos()
+        {
+            return RedirectToAction("Productos");
         }
        
         public ActionResult Contact()

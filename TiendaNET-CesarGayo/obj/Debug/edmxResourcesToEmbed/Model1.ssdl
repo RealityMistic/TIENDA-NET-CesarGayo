@@ -1,21 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="TiendaNETDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityType Name="PedidoProducto">
-    <Key>
-      <PropertyRef Name="Pedido_Id" />
-      <PropertyRef Name="Producto_Id" />
-    </Key>
-    <Property Name="Pedido_Id" Type="int" Nullable="false" />
-    <Property Name="Producto_Id" Type="int" Nullable="false" />
-  </EntityType>
   <EntityType Name="PedidoSet">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Fecha" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Fecha" Type="datetime" />
     <Property Name="Completado" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Usuario_Id" Type="int" Nullable="false" />
+    <Property Name="Producto_Id" Type="int" Nullable="false" />
+    <Property Name="Precio" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ProductoSet">
     <Key>
@@ -23,8 +17,18 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Nombre" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Stock" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar(max)" />
+    <Property Name="Stock" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
+    <Property Name="Precio" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StockSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Producto_Id" Type="int" Nullable="false" />
+    <Property Name="Cantidad" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioSet">
     <Key>
@@ -37,58 +41,10 @@
     <Property Name="Telefono" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Direccion" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <Association Name="FK_PedidoProducto_Pedido">
-    <End Role="PedidoSet" Type="Self.PedidoSet" Multiplicity="1" />
-    <End Role="PedidoProducto" Type="Self.PedidoProducto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PedidoSet">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PedidoProducto">
-        <PropertyRef Name="Pedido_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PedidoProducto_Producto">
-    <End Role="ProductoSet" Type="Self.ProductoSet" Multiplicity="1" />
-    <End Role="PedidoProducto" Type="Self.PedidoProducto" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ProductoSet">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PedidoProducto">
-        <PropertyRef Name="Producto_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_UsuarioPedido">
-    <End Role="UsuarioSet" Type="Self.UsuarioSet" Multiplicity="1" />
-    <End Role="PedidoSet" Type="Self.PedidoSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UsuarioSet">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PedidoSet">
-        <PropertyRef Name="Usuario_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityContainer Name="TiendaNETDBModelStoreContainer">
-    <EntitySet Name="PedidoProducto" EntityType="Self.PedidoProducto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PedidoSet" EntityType="Self.PedidoSet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ProductoSet" EntityType="Self.ProductoSet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StockSet" EntityType="Self.StockSet" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsuarioSet" EntityType="Self.UsuarioSet" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK_PedidoProducto_Pedido" Association="Self.FK_PedidoProducto_Pedido">
-      <End Role="PedidoSet" EntitySet="PedidoSet" />
-      <End Role="PedidoProducto" EntitySet="PedidoProducto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PedidoProducto_Producto" Association="Self.FK_PedidoProducto_Producto">
-      <End Role="ProductoSet" EntitySet="ProductoSet" />
-      <End Role="PedidoProducto" EntitySet="PedidoProducto" />
-    </AssociationSet>
-    <AssociationSet Name="FK_UsuarioPedido" Association="Self.FK_UsuarioPedido">
-      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
-      <End Role="PedidoSet" EntitySet="PedidoSet" />
-    </AssociationSet>
   </EntityContainer>
 </Schema>

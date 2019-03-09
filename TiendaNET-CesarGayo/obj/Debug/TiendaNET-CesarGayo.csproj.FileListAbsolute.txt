@@ -1,4 +1,3 @@
-C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\obj\Debug\TiendaNET-CesarGayo.csprojAssemblyReference.cache
 C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\obj\Debug\TiendaNET-CesarGayo.csproj.CoreCompileInputs.cache
 C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\bin\TiendaNET-CesarGayo.dll.config
 C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\bin\TiendaNET-CesarGayo.dll
@@ -128,3 +127,4 @@ C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\bin\es\Micro
 C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\obj\Debug\TiendaNET-CesarGayo.csproj.CopyComplete
 C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\obj\Debug\TiendaNET-CesarGayo.dll
 C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\obj\Debug\TiendaNET-CesarGayo.pdb
+C:\Users\cesar\source\repos\TiendaNET-CesarGayo\TiendaNET-CesarGayo\obj\Debug\TiendaNET-CesarGayo.csprojAssemblyReference.cache

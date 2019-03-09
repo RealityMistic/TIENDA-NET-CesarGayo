@@ -5,11 +5,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Fecha" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Fecha" Type="DateTime" Precision="3" />
     <Property Name="Completado" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Usuario_Id" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="UsuarioSet" Relationship="Self.FK_UsuarioPedido" FromRole="PedidoSet" ToRole="UsuarioSet" />
-    <NavigationProperty Name="ProductoSet" Relationship="Self.PedidoProducto" FromRole="PedidoSet" ToRole="ProductoSet" />
+    <Property Name="Producto_Id" Type="Int32" Nullable="false" />
+    <Property Name="Precio" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="ProductoSet">
     <Key>
@@ -17,9 +17,18 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Nombre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Stock" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="PedidoSet" Relationship="Self.PedidoProducto" FromRole="ProductoSet" ToRole="PedidoSet" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Stock" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
+    <Property Name="Precio" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StockSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Producto_Id" Type="Int32" Nullable="false" />
+    <Property Name="Cantidad" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuarioSet">
     <Key>
@@ -31,35 +40,11 @@
     <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Telefono" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Direccion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="PedidoSet" Relationship="Self.FK_UsuarioPedido" FromRole="UsuarioSet" ToRole="PedidoSet" />
   </EntityType>
-  <Association Name="FK_UsuarioPedido">
-    <End Role="UsuarioSet" Type="Self.UsuarioSet" Multiplicity="1" />
-    <End Role="PedidoSet" Type="Self.PedidoSet" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="UsuarioSet">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="PedidoSet">
-        <PropertyRef Name="Usuario_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PedidoProducto">
-    <End Role="PedidoSet" Type="Self.PedidoSet" Multiplicity="*" />
-    <End Role="ProductoSet" Type="Self.ProductoSet" Multiplicity="*" />
-  </Association>
   <EntityContainer Name="TiendaNETDBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="PedidoSet" EntityType="Self.PedidoSet" />
     <EntitySet Name="ProductoSet" EntityType="Self.ProductoSet" />
+    <EntitySet Name="StockSet" EntityType="Self.StockSet" />
     <EntitySet Name="UsuarioSet" EntityType="Self.UsuarioSet" />
-    <AssociationSet Name="FK_UsuarioPedido" Association="Self.FK_UsuarioPedido">
-      <End Role="UsuarioSet" EntitySet="UsuarioSet" />
-      <End Role="PedidoSet" EntitySet="PedidoSet" />
-    </AssociationSet>
-    <AssociationSet Name="PedidoProducto" Association="Self.PedidoProducto">
-      <End Role="PedidoSet" EntitySet="PedidoSet" />
-      <End Role="ProductoSet" EntitySet="ProductoSet" />
-    </AssociationSet>
   </EntityContainer>
 </Schema>

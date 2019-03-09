@@ -1,0 +1,1 @@
+﻿ALTER TABLE dbo.PedidoSet DROP CONSTRAINT FK_PedidoProducto_Pedido;

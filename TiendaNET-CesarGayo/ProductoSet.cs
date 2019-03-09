@@ -14,18 +14,11 @@ namespace TiendaNET_CesarGayo
     
     public partial class ProductoSet
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProductoSet()
-        {
-            this.PedidoSet = new HashSet<PedidoSet>();
-        }
-    
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Descripcion { get; set; }
-        public string Stock { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PedidoSet> PedidoSet { get; set; }
+        public int Stock { get; set; }
+        public int Cantidad { get; set; }
+        public int Precio { get; set; }
     }
 }
