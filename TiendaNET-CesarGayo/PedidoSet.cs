@@ -15,8 +15,6 @@ namespace TiendaNET_CesarGayo
     public partial class PedidoSet
     {
         public int Id { get; set; }
-        public Nullable<System.DateTime> Fecha { get; set; }
-        public string Completado { get; set; }
         public int Producto_Id { get; set; }
         public int Precio { get; set; }
         public int Cantidad { get; set; }

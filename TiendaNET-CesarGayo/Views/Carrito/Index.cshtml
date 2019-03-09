@@ -1,8 +1,11 @@
 ﻿@model IEnumerable<TiendaNET_CesarGayo.ProductoSet>
-
-<p>
-    <h3>Precio del carrito: @ViewBag.PrecioTotal</h3>
-</p>
+    <div>
+        <p>
+            <h3>
+                @Html.ActionLink("Comprar", "VolcarCarrito", "Carrito")
+            </h3>
+        </p>
+    </div>
 <table class="table">
 
     @{
@@ -56,6 +59,4 @@
 
 </table>
 
-<div>
-    @Html.ActionLink("Comprar", "VolcarCarrito", "CarritoCompra")
-</div>
+

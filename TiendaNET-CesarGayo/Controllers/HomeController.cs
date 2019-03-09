@@ -23,9 +23,8 @@ namespace TiendaNET_CesarGayo.Controllers
         }
         public ActionResult Productos()
         {
-
-            ViewBag.Message = "Productos de la Tienda";
             
+            /*
             var lista = db.ProductoSet.Select(x=> new ProductoViewModel
             {
                 CantidadAPedir = 0,
@@ -37,28 +36,12 @@ namespace TiendaNET_CesarGayo.Controllers
             });
           
             return View(lista);
+            */
         
-            // return View(db.ProductoSet);
-        }
-        public ActionResult AgregarACarrito(int id, int cantidadAPedir)
-        {
-            CarritoCompra productoCantidad = new CarritoCompra();
-           // productoCantidad.AddCarrito(id, cantidadAPedir);
-           // Session["Carrito"] = productoCantidad;
-
-            return RedirectToAction("Index", "Carrito");
-           // return View("Index");
-        }
-        public ActionResult Mas()
-        {
-            return RedirectToAction("Productos");
-        }
-
-        public ActionResult Menos()
-        {
-            return RedirectToAction("Productos");
+            return View(db.ProductoSet.ToList());
         }
        
+    
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";

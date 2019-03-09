@@ -5,8 +5,6 @@
       <EntityTypeMapping TypeName="TiendaNETDBModel.PedidoSet">
         <MappingFragment StoreEntitySet="PedidoSet">
           <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-          <ScalarProperty Name="Completado" ColumnName="Completado" />
           <ScalarProperty Name="Producto_Id" ColumnName="Producto_Id" />
           <ScalarProperty Name="Precio" ColumnName="Precio" />
           <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />

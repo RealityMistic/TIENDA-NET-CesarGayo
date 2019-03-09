@@ -1,6 +1,6 @@
-﻿@model IEnumerable<TiendaNET_CesarGayo.Models.ProductoViewModel>
+﻿@model IEnumerable<TiendaNET_CesarGayo.ProductoSet>
 <p>
-    @Html.ActionLink("Ir al carrito", "Carrito")
+    @Html.ActionLink("Ir al carrito", "Index", "Carrito")
 </p>
 <table class="table">
     <tr>
@@ -12,6 +12,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Stock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Precio)
         </th>
         <th></th>
     </tr>
@@ -35,7 +38,7 @@
                     @Html.DisplayFor(modelItem => item.Precio)
                 </td>
                 <td>
-                    @using (Html.BeginForm("AgregarACarrito", "Home", new { id = item.Id }))
+                    @using (Html.BeginForm("AniadirProducto","Carrito", new { id = item.Id, cantidad= item.Cantidad }))
                     {
 
                         <div style="width: 150px;">
@@ -48,7 +51,7 @@
                                         <span class="glyphicon glyphicon-minus"></span>
                                     </button>
                                 </span>
-                                <input type="text" id="cantidadAPedir_@item.Id" name="cantidadAPedir" class="form-control input-number" value="@item.CantidadAPedir" min="1" max="@item.Stock">
+                                <input type="text" id="cantidadAPedir_@item.Id" name="Cantidad" class="form-control input-number" value="@item.Cantidad" min="1" max="@item.Stock">
                                 <span class="input-group-btn">
                                     <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="cantidadAPedir_@item.Id">
                                         <span class="glyphicon glyphicon-plus"></span>
@@ -59,11 +62,8 @@
                             <p></p>
                         </div>
                         <div>
-
-                            @Html.ActionLink("Añadir", "AniadirProducto", "Carrito", new { id = item.Id }, new { @class = "btn btn-primary" })
-                            @* @Html.ActionLink("Agregar a Carrito", "AgregarACarrito", new { id = item.Id, cantidadAPedir = item.CantidadAPedir }, new { @class = "btn btn-primary", @style = "color:white" })
-                            @Html.TextBox("Nº", 0, new { @class = "form-control" })
-                            @Html.ActionLink("Menos", "Menos", new { id = item.Id }, new { @class = "btn btn-primary", @style = "color:white" })*@
+                            <input type="submit" class="btn btn-primary" value="Añadir" />
+                            
                         </div>
                     }
             </tr>

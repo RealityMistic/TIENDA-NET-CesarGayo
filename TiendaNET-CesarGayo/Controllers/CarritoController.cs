@@ -14,7 +14,7 @@ namespace TiendaNET_CesarGayo.Controllers
    
     public class CarritoController : Controller
     {
-        int? PrecioTotal = 0;
+        int PrecioTotal = 0;
         private TiendaNETDBEntities db = new TiendaNETDBEntities();
 
         // GET: Carrito
@@ -23,47 +23,27 @@ namespace TiendaNET_CesarGayo.Controllers
             return View(cc.ToList());
         }
 
-        public ActionResult AniadirProducto(CarritoCompra cc, int id)
+        public ActionResult AniadirProducto(CarritoCompra cc, int id, int cantidad)
         {
+            
             ProductoSet nuevop = db.ProductoSet.Find(id);
-          //  nuevop.Cantidad = cantidadAPedir;
-            cc.Add(nuevop);
-            /*
-            ProductoSet p = cc.Find(x => x.Id == id);
 
-            if (p == null)
+
+            if (cantidad == 0)
             {
-                ProductoSet nuevop = db.ProductoSet.Find(id);
+
                 nuevop.Cantidad = 1;
-                cc.Add(nuevop);
-            }
-            else
+           
+            } else
             {
-                ProductoSet nuevop = p;
-                
-                nuevop.Cantidad = cantidadAPedir;
-                cc.Add(nuevop);
+                nuevop.Cantidad = cantidad;
             }
-
-            */
+            cc.Add(nuevop);
+           
             return RedirectToAction("Index");
         }
-            /*
-            ProductoSet productoAAniadir = db.ProductoSet.Find(id);
-foreach (var item in cc)
-{
-            if (productoAAniadir.Cantidad + item.Cantidad <= productoAAniadir.Stock))
-            {
-                productoAAniadir.Cantidad += item.Cantidad;
-            }
-            db.ProductoSet.Add(productoAAniadir);
-            db.SaveChanges();
-            this.PrecioTotal += item.Cantidad * item.Precio;
+            
 
-}
-cc.Add(productoAAniadir);
-return RedirectToAction("Productos", "Home");
-*/
             // GET: Carrito/Delete/5
             public ActionResult Eliminar(CarritoCompra cc, int id)
             {
@@ -94,60 +74,43 @@ return RedirectToAction("Productos", "Home");
             base.Dispose(disposing);
         }
 
-        
-        /*
-        public ActionResult RemoveProducto(CarritoCompra cc, int id)
-        {
-            ProductoSet p = db.ProductoSet.Find(id);
-            cc.Remove(p);
-
-            return RedirectToAction("Index", "Productoes");
-        }
-        */
+       
         public ActionResult VolcarCarrito(CarritoCompra cc)
         {
-           // Factura f = new Factura();
-           // f.Total = this.CalculateTotal(cc);
-           // f.Usuario_Id = User.Identity.GetUserName();
-           // db.Facturas.Add(f);
-           // db.SaveChanges();
-
-            // db.Facturas.Add(f);
-
+            PedidoSet nuevopedido = new PedidoSet();
             foreach (ProductoSet p in cc)
             {
-                PedidoSet pedido = new PedidoSet();
-                pedido.Precio = p.Precio;
-                pedido.Producto_Id = p.Id;
-                pedido.Cantidad = p.Cantidad;
+                
+                PrecioTotal += p.Precio;
+                nuevopedido.Producto_Id = p.Id;
+                nuevopedido.Cantidad = p.Cantidad;
 
                 ProductoSet temp = db.ProductoSet.Find(p.Id);
-                temp.Cantidad = temp.Cantidad - pedido.Cantidad;
+                temp.Cantidad = temp.Cantidad - nuevopedido.Cantidad;
                 comprobarStock(p.Id);
                 db.Entry(temp).State = EntityState.Modified;
                 db.SaveChanges();
 
-               // pedido.Factura_Id = db.Facturas.Find(f.Id).Id;
-
-                db.PedidoSet.Add(pedido);
-                db.SaveChanges();
+                
             }
-
+            nuevopedido.Precio = PrecioTotal;
+            db.PedidoSet.Add(nuevopedido);
+            db.SaveChanges();
+            
             cc.NuevoCarrito(ControllerContext);
 
             return View(cc.ToList());
-
-            return RedirectToAction("Index", "Productoes");
+            
         }
 
         public void comprobarStock(int id)
         {
-            int cantidad = db.ProductoSet.Find(id).Cantidad;
-            if (cantidad <= 2)
+            int stock = db.ProductoSet.Find(id).Stock;
+            if (stock <= 2)
             {
-                StockSet stock = new StockSet();
-                stock.Producto_Id = db.ProductoSet.Find(id).Id;
-                stock.Cantidad = cantidad;
+                StockSet stockset = new StockSet();
+                stockset.Producto_Id = db.ProductoSet.Find(id).Id;
+                stockset.Cantidad = 100;
                 db.SaveChanges();
             }
         }

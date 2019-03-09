@@ -5,8 +5,6 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Fecha" Type="datetime" />
-    <Property Name="Completado" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Producto_Id" Type="int" Nullable="false" />
     <Property Name="Precio" Type="int" Nullable="false" />
     <Property Name="Cantidad" Type="int" Nullable="false" />
